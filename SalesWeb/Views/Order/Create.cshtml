@@ -1,0 +1,7 @@
+﻿@model SalesLib.Models.Order
+@{
+    ViewData["Title"] = "New Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@await Html.PartialAsync("~/Views/Order/_OrderForm.cshtml", Model)
+

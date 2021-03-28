@@ -1,0 +1,98 @@
+﻿@model SalesLib.Models.Order
+@{
+    var model = Model;
+}
+<div class="container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>Error!</strong> @TempData["ErrorMessage"].ToString()
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    }
+    <form asp-action="@Html.Raw(model.Id == 0 ? "Create" : "Edit")" method="post">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.HiddenFor(model => model.Id)
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control maxlength", @placeholder = nameof(Model.Email), @maxlength = "100" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "label label-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })*@
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control maxlength", @placeholder = nameof(Model.Name), @maxlength = "100" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "label label-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control maxlength", @placeholder = nameof(Model.PhoneNumber), @maxlength = "30" })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "label label-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.ServiceType, new { @class = "form-control maxlength", @placeholder = nameof(Model.ServiceType), @maxlength = "100" })
+                    @Html.ValidationMessageFor(model => model.ServiceType, "", new { @class = "label label-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.FromAddress, new { @class = "form-control maxlength", @placeholder = nameof(Model.FromAddress), @maxlength = "1000" })
+                    @Html.ValidationMessageFor(model => model.FromAddress, "", new { @class = "label label-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.ToAddress, new { @class = "form-control maxlength", @placeholder = nameof(Model.ToAddress), @maxlength = "1000" })
+                    @Html.ValidationMessageFor(model => model.ToAddress, "", new { @class = "label label-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    @*<div class="form-group row">
+                            <label for="example-datetime-local-input" class="col-2 col-form-label">Date and time</label>
+                            <div class="col-10">
+                                <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                            </div>
+                        </div>*@
+                    @Html.TextBox("CarriedOutDate", model.CarriedOutDate.ToString("yyyy-MM-dd"), new { @class = "form-control", @type = "date", min = DateTime.Now.ToString("yyyy-MM-dd"), @placeholder = nameof(Model.CarriedOutDate) })
+                    @Html.ValidationMessageFor(model => model.CarriedOutDate, "", new { @class = "label label-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    @Html.TextAreaFor(model => model.Note, new { @class = "form-control maxlength", @placeholder = nameof(Model.Note), @maxlength = "8000" })
+                    @Html.ValidationMessageFor(model => model.Note, "", new { @class = "label label-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12 mb-3">
+                <button type="submit" class="btn btn-primary">@Html.Raw(model.Id == 0 ? "Place order" : "Edit order")</button>
+            </div>
+        </div>
+    </form>
+</div>

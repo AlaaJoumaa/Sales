@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SalesLib.Models.Order>
+@{
+    var orders = Model;
+    ViewData["Title"] = "Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form asp-action="Index" method="get">
+    <div class="row">
+        <div class="col-6 mb-3">
+            <a href="@Url.Action("Create","Order")" class="btn btn-primary">New order</a>
+        </div>
+        <div class="col-4 mb-3">
+            @Html.TextBox("Search", "", new { @class = "form-control maxlength float-right", @placeholder = "Search", @maxlength = "100" })
+        </div>
+        <div class="col-2 mb-3">
+            <button type="submit" class="btn btn-primary">Find</button>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="col-12">
+            @Html.AntiForgeryToken()
+            <table class="w-100 table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone number</th>
+                        <th scope="col">Service type</th>
+                        <th scope="col">From address</th>
+                        <th scope="col">To address</th>
+                        <th scope="col">Carriedout date</th>
+                        <th scope="col">Note</th>
+                        <td scope="col">Edit</td>
+                        <td scope="col">Delete</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in orders)
+                    {
+                        <tr>
+                            <td>@order.Id</td>
+                            <td>@order.Name</td>
+                            <td>@order.Email</td>
+                            <td>@order.PhoneNumber</td>
+                            <td>@order.ServiceType</td>
+                            <td>@order.FromAddress</td>
+                            <td>@order.ToAddress</td>
+                            <td>@order.CarriedOutDate.ToString("yyyy/MM/dd")</td>
+                            <td>@order.Note</td>
+                            <td><a href="@Url.Action("Edit", "Order", new { id = order.Id })">Edit</a></td>
+                            <td><a href="@Url.Action("Delete", "Order", new { id = order.Id })">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    </div>
+</div>

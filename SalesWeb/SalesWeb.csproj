@@ -34,7 +34,7 @@
 
   <ItemGroup>
     <Reference Include="ApplicationLib">
-      <HintPath>..\..\..\Freelancing\MY TOOLS\ApplicationLib\ApplicationLib\bin\Release\netcoreapp3.1\ApplicationLib.dll</HintPath>
+      <HintPath>..\SalesAPI\obj\ApplicationLib.dll</HintPath>
     </Reference>
   </ItemGroup>
 
